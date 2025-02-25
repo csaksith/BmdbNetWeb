@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "phA/o0shhodH3TiyQfQC3eci7RJXeLR6g49RGMg+EOo=",
+  "Source": "BmdbNetWeb",
+  "BasePath": "_content/BmdbNetWeb",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "BmdbNetWeb\\wwwroot",
+      "Source": "BmdbNetWeb",
+      "ContentRoot": "C:\\repos\\max\\c-sharp-repos\\BmdbNetWeb\\BmdbNetWeb\\wwwroot\\",
+      "BasePath": "_content/BmdbNetWeb",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}
