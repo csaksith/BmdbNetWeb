@@ -20,15 +20,9 @@ public partial class Credit
     [Column("ActorID")]
     public int ActorId { get; set; }
 
-    //[StringLength(100)]
-    //[Unicode(false)]
     public string Role { get; set; } = null!;
 
-    //[ForeignKey("ActorId")]
-    //[InverseProperty("Credits")]
     public Actor? Actor { get; set; } = null!;
 
-    //[ForeignKey("MovieId")]
-    //[InverseProperty("Credits")]
     public Movie? Movie { get; set; } = null!;
 }

@@ -2,10 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\BmdbNetWeb",
-    "\\BmdbNetWeb\\bin",
     "\\BmdbNetWeb\\Controllers",
-    "\\BmdbNetWeb\\obj"
+    "\\BmdbNetWeb\\Models",
+    "\\BmdbNetWeb\\Properties"
   ],
-  "SelectedNode": "\\BmdbNetWeb\\BmdbNetWeb.csproj",
+  "SelectedNode": "\\BmdbNetWeb.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -14,5 +14,7 @@ public partial class BmdbContext : DbContext {
     public virtual DbSet<Credit> Credits { get; set; }
 
     public virtual DbSet<Movie> Movies { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<MovieCollection> MovieCollections { get; set; }
 }

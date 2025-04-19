@@ -98,6 +98,11 @@ namespace BmdbNetWeb.Controllers
 
             return NoContent();
         }
+        // GET: api/Actors/by-gender/F
+        [HttpGet("by-gender/{gender}")]
+        public async Task<ActionResult<IEnumerable<Actor>>> GetActorsByGender(string gender) {
+            return await _context.Actors.Where(a=>a.Gender==gender).ToListAsync();
+        }
 
         private bool ActorExists(int id)
         {

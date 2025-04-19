@@ -88,6 +88,16 @@ namespace BmdbNetWeb.Controllers {
             return NoContent();
         }
 
+        // GET: api/Credits
+        [HttpGet("movie-id/{movieId}")]
+        public async Task<ActionResult<IEnumerable<Credit>>> GetCreditsForMovie(int movieId) {
+            // SELECT * FROM Credit WHERE MovieId = movieId
+            var credits = _context.Credits.Include(c => c.Actor)
+                                          .Include(c => c.Movie)
+                                          .Where(c => c.MovieId==movieId);
+            return await credits.ToListAsync();
+        }
+
         private bool CreditExists(int id) {
             return _context.Credits.Any(e => e.Id==id);
         }
