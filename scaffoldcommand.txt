@@ -1,0 +1,88 @@
+Instructions
+
+Step 1: Scaffold the DbContext and Models
+Run the following command in the **Package Manager Console** to generate the `Models` folder and DbContext:
+
+Scaffold-DbContext "Data Source=DESKTOP-VDMQ3OL\SQLEXPRESS;Database=XXXX;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -DataAnnotations -Force -Context XXXXContext
+
+Scaffold-DbContext "Data Source=DESKTOP-VDMQ3OL\SQLEXPRESS;Database=BMDB;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -DataAnnotations -Force -Context BmdbContext
+
+Step 2: Cleanup DbContext, you should remove unnecessary elements like:
+
+- **Empty constructors** that are auto-generated.
+- **Unneeded `OnConfiguring` method** (since configuration is already in `Program.cs`).
+- **Excessive comments or redundant annotations**.
+
+How to Clean Up XXXXContext.cs
+
+1. **Open `XXXXContext.cs`** (your DbContext file in the `Models` folder).
+2. **Remove the empty constructor** if it's not used.
+3. **Delete `OnConfiguring`** if you're setting up the connection string in `Program.cs`.
+4. **Ensure `DbSet<T>` properties are properly formatted**.
+
+Step 3: Update appsettings.json
+
+Ensure your `appsettings.json` file contains the correct database connection string:
+
+
+{
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "XXXXConnectionString": "Data Source=DESKTOP-VDMQ3OL\\SQLEXPRESS;Database=XXXX;Integrated Security=True;TrustServerCertificate=True;"
+  }
+}
+
+
+Step 4: Configure Program.cs
+
+Modify Program.cs to register your DbContext and configure services:
+
+
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddDbContext<XXXXContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("XXXXConnectionString")));
+
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    opt.JsonSerializerOptions.WriteIndented = true;
+});
+
+// Build the application
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+
+
+Step 5: Create Controllers
+
+1. In **Solution Explorer**, right-click on the **Controllers** folder.
+2. Select **Add > Controller**.
+3. Choose **API Controller with actions, using Entity Framework** and click **Add**.
+4. Select your **Model Class** (e.g., `User`, `Vendor`, etc.) and **Data Context Class** (`XXXXContext`).
+5. Click **Add** to generate the controller.
+6. Repeat this process for each model you need.
